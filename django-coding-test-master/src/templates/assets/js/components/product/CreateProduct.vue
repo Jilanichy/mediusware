@@ -91,10 +91,12 @@
       </div>
     </div>
 
-    <button @click="saveProduct" type="submit" class="btn btn-lg btn-primary">Save</button>
+    <button @click="saveProduct" method="POST" type="submit" class="btn btn-lg btn-primary">Save</button>
     <button type="button" class="btn btn-secondary btn-lg">Cancel</button>
   </section>
 </template>
+
+
 
 <script>
 import vue2Dropzone from 'vue2-dropzone'

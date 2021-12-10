@@ -23,6 +23,7 @@
                 </select>
             </div>
 
+
             <div class="col-md-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -33,6 +34,7 @@
                     <input type="text" name="price_to" aria-label="Last name" placeholder="To" class="form-control">
                 </div>
             </div>
+
             <div class="col-md-2">
                 <input type="date" name="date" placeholder="Date" class="form-control">
             </div>
@@ -58,7 +60,7 @@
                 </thead>
 
                 <tbody>
-                {% for product in product_info_obj %}
+                {% for product in product_info %}
 
                 <tr>
                     <td>{{product.product.id}}</td>
@@ -68,9 +70,8 @@
                     <td>
                         <dl class="row mb-0" style="height: 80px; overflow: hidden" id="variant">
                             <b>{{ product.product_variant_one.variant_title }}</b>
-                            <b>{{ product.product_variant_two.variant_title }}</b>
-                            <b>{{ product.product_variant_three.variant_title }}</b>
-
+                             <b>{{ product.product_variant_two.variant_title }}</b>
+                              <b>{{ product.product_variant_three.variant_title }}</b>
                             <dt class="col-sm-3 pb-0">
 
                             </dt>
@@ -86,7 +87,7 @@
                         <button onclick="$('#variant').toggleClass('h-auto')" class="btn btn-sm btn-link">Show more
                         </button>
                     </td>
-                    <td><b>Price : {{ product.price }}</b></td>
+                    <td><b>Price :{{ product.price }}</b></td>
                     <td>InStock : {{ product.stock }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
@@ -99,42 +100,27 @@
 
             </table>
         </div>
-
-    </div>
-
-    <div class="card-footer">
-        <div class="row justify-content-between">
-            <div class="col-md-6">
-                <p>Showing   {% for product in product_info_obj %} {{ product.product.id }} - {% endfor %} out of {{ total_product }}</p>
-            </div>
-            <div class="col-md-2">
-
-            </div>
-        </div>
-
-
-
     </div>
 </div>
 
-{% if product_info_obj.has_other_pages %}
+{% if page_obj.has_other_pages %}
   <ul class="pagination justify-content-end">
 
-    {% if product_info_obj.has_previous %}
-    <li class="page-item"><a class="page-link" href="?page={{ product_info_obj.previous_page_number }}">&laquo;</a></li>
+    {% if page_obj.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
     {% else %}
 
     {% endif %}
-    {% for i in product_info_obj.paginator.page_range %}
+    {% for i in page_obj.paginator.page_range %}
         {% if users.number == i %}
     <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
      {% else %}
       <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
     {% endfor %}
-    {% if product_info_obj.has_next %}
+    {% if page_obj.has_next %}
     <li class="page-item">
-      <a class="page-link" href="?page={{ product_info_obj.next_page_number }}">Next</a>
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
     </li>
     {% else %}
     <li class="page-item disabled"><a class="page-link" href="#"></a></li>
